@@ -20,11 +20,6 @@ The Product Management System API is a tool for managing products and companies.
 - **Implemented Features**: `findOne` and `findAll` methods.
 - **Database Population**: Database is populated during module initialization (`moduleinit`). This feature is marked for removal before deploying to production.
 
-### Validation
-We have implemented validation for all input data to ensure data integrity and prevent invalid requests. We are using the NestJS validation pipe and class-validator decorators and global validation to cover validation and transformation for **Body**, **Parameters**, and **Queries**.
-
-
-
 ### Logging
 - Logs are sent to the console for debugging and monitoring purposes.
 
@@ -38,6 +33,13 @@ We return error messages in a unified form.
 - **DatabaseExceptionFilter**: Handles `QueryFailedError` exceptions. Specifically, for duplicate record errors, it returns the message:
   > "A record with the same unique field already exists."
 - **BaseExceptionFilter**: Generic exception handling for other errors.
+
+
+### Validation
+We have implemented validation for all input data to ensure data integrity and prevent invalid requests. We are using the NestJS validation pipe and class-validator decorators and global validation to cover validation and transformation for **Body**, **Parameters**, and **Queries**.
+
+### CI/CD
+I have included a CI actions file that contains the build and test steps. Currently, the GitHub Actions workflow automatically runs unit tests after each push. Integration tests and continuous deployment (CD) are not yet implemented but will be added in future versions.
 
 
 ### API Documentation
@@ -58,6 +60,7 @@ We return error messages in a unified form.
     ```bash
     npm run test:company
     ```
+
 
 ## Installation
 
