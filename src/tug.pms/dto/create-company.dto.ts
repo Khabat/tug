@@ -1,14 +1,14 @@
-import { IsNumber, IsOptional, IsString, IsNotEmpty } from "class-validator";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { IsString, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 
 export class CreateCompanyDto {
+  @ApiProperty({ description: 'Name of the company', example: 'Tech Corp' })
+  @IsString()
+  @IsNotEmpty()
+  companyName: string;
 
-    @IsString()
-    @IsNotEmpty()
-    companyName: string;
-
-    @IsNumber()
-    @IsOptional()
-    productId?: number;
-  }
-
-  
+  @ApiPropertyOptional({ description: 'ID of the associated product', example: 1 })
+  @IsNumber()
+  @IsOptional()
+  productId?: number;
+}
