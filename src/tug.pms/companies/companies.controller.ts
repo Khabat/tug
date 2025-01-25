@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from '../dto/create-company.dto';
@@ -13,6 +13,7 @@ export class CompaniesController {
   @ApiOperation({ summary: 'Create a new company' })
   @ApiResponse({ status: 201, description: 'Company successfully created.' })
   @ApiResponse({ status: 400, description: 'Bad Request.' })
+  @ApiResponse({ status: 404, description: 'Not Found. Resource not found.' })
   create(@Body() createCompanyDto: CreateCompanyDto) {
     return this.companyService.create(createCompanyDto);
   }
@@ -30,7 +31,10 @@ export class CompaniesController {
   @ApiResponse({ status: 200, description: 'Company retrieved successfully.' })
   @ApiResponse({ status: 404, description: 'Company not found.' })
   async findOne(@Param('id') id: number) {
-    return this.companyService.findOne(id);
+    const company = await this.companyService.findOne(id);
+    if(!company){
+      throw new NotFoundException(`Company with id ${id} not found.`);
+    }
   }
 
   @Put(':id')

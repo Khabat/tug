@@ -1,4 +1,4 @@
-# Product Management System (PMS): Assessment for TUG
+# Product Management System (PMS)
 
 ## Overview
 The Product Management System API is a tool for managing products and companies. Each company can only have one associated product. I have designed this application for assessment purposes and have included other key features, such as logging, exception handling. PMS contains also  a partial implemention of category and subcategory services.
@@ -67,7 +67,6 @@ PMS has a CI actions file that contains the build and test steps. Currently, the
 ### Prerequisites
 - Node.js (version >= 16.x)
 - MySQL database
-- Nest (version >= 11.x)
 
 ### Steps
 1. Clone the repository:
