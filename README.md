@@ -1,7 +1,7 @@
 # Product Management System (Assessment for TUG)
 
 ## Overview
-The Product Management System API provides is a tool for managing products and companies. Each company can only have one associated product. I have designed this application for assessment purposes and have included additional key features, such as logging, exception handling. I have also implemented category and subcategory services partially.
+The Product Management System API is a tool for managing products and companies. Each company can only have one associated product. I have designed this application for assessment purposes and have included other key features, such as logging, exception handling. I have also implemented category and subcategory services partially.
 
 ## Features
 
