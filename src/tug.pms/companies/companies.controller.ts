@@ -4,6 +4,7 @@ import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from '../dto/create-company.dto';
 import { UpdateCompanyDto } from '../dto/update-company.dto';
 
+
 @ApiTags('companies')
 @Controller('companies')
 export class CompaniesController {
@@ -21,8 +22,8 @@ export class CompaniesController {
   @Get()
   @ApiOperation({ summary: 'Get all companies' })
   @ApiResponse({ status: 200, description: 'List of companies retrieved successfully.' })
-  findAll() {
-    return this.companyService.findAll();
+  async findAll() {
+    return (await this.companyService.findAll())|| {};
   }
 
   @Get(':id')
@@ -32,9 +33,7 @@ export class CompaniesController {
   @ApiResponse({ status: 404, description: 'Company not found.' })
   async findOne(@Param('id') id: number) {
     const company = await this.companyService.findOne(id);
-    if(!company){
-      throw new NotFoundException(`Company with id ${id} not found.`);
-    }
+    return company||{};
   }
 
   @Put(':id')

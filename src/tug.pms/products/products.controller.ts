@@ -20,17 +20,8 @@ export class ProductsController {
   @Get()
   @ApiOperation({ summary: 'Retrieve all products' })
   @ApiResponse({ status: 200, description: 'List of retieved products' })
-  findAll() {
-    return this.productService.findAll();
-  }
-
-  @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a product by ID' })
-  @ApiParam({ name: 'id', type: Number, description: 'The ID of the product' })
-  @ApiResponse({ status: 200, description: 'Product retrieved' })
-  @ApiResponse({ status: 404, description: 'Product not found' })
-  async findOne(@Param('id') id: number) {
-    return this.productService.findOne(id);
+  async findAll() {
+    return (await this.productService.findAll())||[];
   }
 
   @Get('search')
@@ -39,8 +30,21 @@ export class ProductsController {
   @ApiResponse({ status: 200, description: 'Product retrieved' })
   @ApiResponse({ status: 404, description: 'Product not found' })
   async findByBarcode(@Query('barcode') barcode: string) {
-    return this.productService.findOneByBarcode(barcode);
+    const result = await this.productService.findOneByBarcode(barcode);
+    return result || {};
   }
+
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Retrieve a product by ID' })
+  @ApiParam({ name: 'id', type: Number, description: 'The ID of the product' })
+  @ApiResponse({ status: 200, description: 'Product retrieved' })
+  @ApiResponse({ status: 404, description: 'Product not found' })
+  async findOne(@Param('id') id: number) {
+    return (await this.productService.findOne(id)) || {};
+  }
+
+
 
   @Put(':id')
   @ApiOperation({ summary: 'Update a product by ID' })
